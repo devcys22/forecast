@@ -30,7 +30,7 @@
             </div>
             <div class="forecast__itemRight">
               <img
-                src="assets/images/icons/hail.png"
+                src="@/assets/images/icons/hail.png"
                 alt=""
                 class="forecast__weekListImg"
               />

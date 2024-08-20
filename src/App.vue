@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeMount, onBeforeUnmount } from 'vue';
 import { RouterView } from 'vue-router'
-import DefaultLayout from '@/layouts/DefaultLayout.vue'
+import DefaultLayout from '@/layout/DefaultLayout.vue'
 
 const init = () => {
   let vh = window.innerHeight * 0.01;
