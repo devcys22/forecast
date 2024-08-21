@@ -1,4 +1,11 @@
 <script setup>
+import { onBeforeMount } from 'vue';
+import axios from 'axios';
+onBeforeMount(async() => {
+  //서울 날씨 정보를 요청하는 API
+  const result = await axios.get('https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/seoul?key=ZY7EJFHJCGKS83TZJLQGJDHG2&uniGroup=metric&lang=ko');
+  console.log(result);
+});
 </script>
 
 <template>
