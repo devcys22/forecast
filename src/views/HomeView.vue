@@ -1,7 +1,9 @@
 <script setup>
 import { useWeatherStore } from '@/stores/weather';
 import { storeToRefs } from 'pinia';
-import { computed, onBeforeMount } from 'vue';
+import {  onBeforeMount } from 'vue';
+import dayjs from 'dayjs';
+import {getImage} from '@/composables/helper.js'
 
 onBeforeMount(() => {
     weatherStore.getCurrentWeatherInfo();
@@ -10,15 +12,7 @@ onBeforeMount(() => {
 //서울 날씨 정보를 요청하는 API
 const weatherStore = useWeatherStore();
 const {currentConditions} = storeToRefs(weatherStore);
-const hourToMinutes = computed(() => {
-  const currentDate = new Date();
-  const currentHour = String(currentDate.getHours()).padStart(2, '0');
-  const currentMinute = String(currentDate.getMinutes()).padStart(2, '0');
-  return `${currentHour}:${currentMinute}`
-})
-const getImage = (path) => {
-  return new URL(`../assets/images/icons/${path}.png`, import.meta.url).href;
-}
+
 
 </script>
 
@@ -28,7 +22,7 @@ const getImage = (path) => {
       <h1 class="header__title">
         <span class="material-symbols-outlined"> location_on </span>서울
       </h1>
-      <h2 class="header__date">{{ hourToMinutes.value }}</h2>
+      <h2 class="header__date">{{ dayjs().format('HH:mm') }}</h2>
     </header>
     <!-- 현재 날씨 -->
     <main v-if="currentConditions" class="main">
