@@ -12,6 +12,16 @@ const axiosInstance = axios.create({
     unitGroup: 'metric',
   },
 });
+
+// ipify API를 기본값으로 하는 Axios 인스턴스 생성
+const axiosInstance2 = axios.create({
+  baseURL: 'https://api64.ipify.org/?format=json',
+});
+
+// Free IP API를 기본값으로 하는 Axios 인스턴스 생성
+const axiosInstance3 = axios.create({
+  baseURL: 'https://freeipapi.com/api/json',
+});
 export const useWeatherStore = defineStore('weather', () => {
   // 초기 검색 지역
   const address = ref('seoul');
@@ -67,5 +77,18 @@ export const useWeatherStore = defineStore('weather', () => {
   const forecast = computed(() => {
     return days.value?.filter((v) => v.datetime > dayjs().format('YYYY-MM-DD'))
   })
-  return { currentConditions, hours, forecast, searchData, getCurrentWeatherInfo, getSearchWeatherInfo };
+
+  // 사용자 지역명 구하기
+  const getCityName = async () => {
+    try {
+      const res = await axiosInstance2.get();
+      const ip = res.data.ip;
+      const res2 = await axiosInstance3.get('/' + ip);
+      address.value = res2.data.cityName; // 응답 데이터
+    } catch (e) {
+      alert(e.response?.data ? e.response?.data : e.message);
+    }
+  };
+
+  return {address, currentConditions, hours, forecast, searchData, getCurrentWeatherInfo, getSearchWeatherInfo ,getCityName};
 });
