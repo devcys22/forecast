@@ -2,28 +2,18 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
+## Why make this app
+I worked on a vue.js3 project at work, but I didn't know the principles well, so I looked at a book and made it on my own.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## Domain url
+https://forcast2024.netlify.app/
 
-## Customize configuration
+## function
+- Search country , hourly forecast, Forecast by period
+- Local storage save
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Open API
+https://www.visualcrossing.com/<br/>
+https://www.ipify.org/<br/>
+https://freeipapi.com/<br/>
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
