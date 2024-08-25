@@ -24,7 +24,7 @@ onBeforeMount(() => {
             <span>{{dayjs(`2024-07-01 ${hour.datetime}`).format('H')}}</span>
             <!-- todo 23시 이후데이터 안보임 확인하고 수정해보기 -->
             <img :src="getImage(hour.icon)" 
-                  :alt="`{hour.datetime} ${hour.temp}도`" class="week_icons" />
+                  :alt="`${hour.datetime} ${hour.temp}도`" class="week_icons" />
             <span>{{ hour.temp }}</span>
           </li>
         </ul>
