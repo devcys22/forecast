@@ -37,5 +37,9 @@ export const useWeatherStore = defineStore('weather', () => {
       alert(e.response?.data ? e.response?.data : e.message);
     }
   };
-  return { currentConditions, hours, getCurrentWeatherInfo };
+  //미래 날짜의 날씨 예보 데이터 계산하기
+  const forecast = computed(() => {
+    return days.value?.filter((v) => v.datetime > dayjs().format('YYYY-MM-DD'))
+  })
+  return { currentConditions, hours, forecast, getCurrentWeatherInfo };
 });

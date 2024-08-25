@@ -3,10 +3,10 @@ import { useWeatherStore } from '@/stores/weather';
 import { storeToRefs } from 'pinia';
 import {  onBeforeMount } from 'vue';
 import dayjs from 'dayjs';
-import {getImage} from '@/composables/helper.js'
+import {getImage, dayToker} from '@/composables/helper.js'
 //서울 날씨 정보를 요청하는 API
 const weatherStore = useWeatherStore();
-const {hours} = storeToRefs(weatherStore);
+const {hours, forecast} = storeToRefs(weatherStore);
 onBeforeMount(() => {
     weatherStore.getCurrentWeatherInfo();
 })
@@ -34,18 +34,20 @@ onBeforeMount(() => {
         <strong class="forecast__title">중기예보</strong>
         <ul class="forecast__weekList">
           <!-- 중기 예보 상세 아이템 -->
-          <li class="forecast__weekListItem">
+          <li v-for="day in forecast" :key="day.datetime" class="forecast__weekListItem">
             <div class="forecast__itemLeft">
-              <strong class="forecast__day">월요일</strong>
-              <span class="forecast__date">2024.07.01</span>
+              <strong class="forecast__day">
+                {{ dayToker[dayjs(day.datetime).day()] }}
+              </strong>
+              <span class="forecast__date">{{ day.datetime }}</span>
             </div>
             <div class="forecast__itemMiddle">
-              <strong class="forecast__tmp">32°</strong>
+              <strong class="forecast__tmp">{{day.temp}}</strong>
             </div>
             <div class="forecast__itemRight">
               <img
-                src="@/assets/images/icons/hail.png"
-                alt=""
+                :src="getImage(day.icon)"
+                :alt="`${day.datetime} ${day.temp}도`"
                 class="forecast__weekListImg"
               />
             </div>
